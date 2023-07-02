@@ -21,7 +21,7 @@ export const weatherInterpretation = (code: number) => {
     case 51:
       return 'Light '
       break
-    case 53:
+    case 52:
       return 'moderate '
       break
     case 53:
