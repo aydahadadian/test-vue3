@@ -30,7 +30,7 @@
               <!-- <a-typography-text :delete="item.checked">{{ item.label }}</a-typography-text> -->
 
               <a-typography-paragraph
-                class="!min-w-[60vw] !ml-7 flex mb-0"
+                class="!ml-7 flex mb-0"
                 :delete="item.checked"
                 v-model:content="item.label"
                 :editable="{ editing: item.edit, maxlength: 100 }"
@@ -67,7 +67,6 @@ const setTodos = () => {
   localStorage.setItem('todo-v-app', JSON.stringify(formattedData))
 }
 const removeItem = (index: number) => {
-  console.log(index)
   const newItems = data.value.filter((item) => item.key !== index)
   data.value = newItems
   setTodos()
@@ -84,7 +83,6 @@ const handleEdit = (index: number, type?: 'end' | 'start') => {
 }
 const addItem = () => {
   if (!!item.value && item.value.trim() !== '') {
-    console.log('item.value')
     const itemIndex = Date.now()
     data.value = [...data.value, { checked: false, edit: false, label: item.value, key: itemIndex }]
     item.value = ''
@@ -108,5 +106,8 @@ onMounted(() => {
 }
 .ant-typography {
   margin-bottom: 0 !important;
+}
+.ant-typography textarea {
+  min-width: 50vw !important;
 }
 </style>

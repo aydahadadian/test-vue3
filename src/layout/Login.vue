@@ -41,7 +41,7 @@
 <script lang="ts" setup>
 import { setUser } from '@/utils/userAuth'
 
-import { defineComponent, reactive, toRef } from 'vue'
+import { reactive } from 'vue'
 
 interface FormState {
   username: string
@@ -57,7 +57,6 @@ const onFinish = (values: any) => {
   if (!!values.username && values.username.trim() !== '') {
     setUser(values.username)
     emit('setAuth', true)
-
   }
 }
 

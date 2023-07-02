@@ -1,109 +1,36 @@
 <template>
-  <Layout @setAuth="setAuth" v-if="!!userAuth" />
-  <Login @setAuth="setAuth" v-else />
+  <Layout v-if="!!auth" @setAuth="setAuth" @setTheme="setTheme" :theme="theme" />
+  <Login v-else @setAuth="setAuth" />
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import Layout from './layout/Layout.vue'
 import Login from './layout/Login.vue'
-import { getUser } from './utils/userAuth'
+import { getUser, getTheme } from './utils/userAuth'
 
 const auth = ref<boolean>(false)
+const theme = ref<string>('light')
 
 const userAuth = computed(() => getUser())
-
-watch(userAuth, () => {
-  console.log(userAuth)
-})
 
 const setAuth = (val: boolean) => {
   auth.value = val
 }
+const setTheme = () => {
+  const currentTheme = getTheme()
+  if (!!currentTheme) {
+    theme.value = currentTheme
+  }
+}
+
+onMounted(() => {
+  setTheme()
+
+  if (!!userAuth.value) {
+    setAuth(true)
+  } else {
+    setAuth(false)
+  }
+})
 </script>
-
-<!-- <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style> -->
