@@ -9,6 +9,7 @@ import Layout from './layout/AppLayout.vue'
 import Login from './layout/LoginPage.vue'
 import { getUser, getTheme } from './utils/userAuth'
 import { useTheme } from './composables/theme'
+import router from './router'
 
 const auth = ref<boolean>(false)
 const theme = ref<string>('light')
@@ -18,13 +19,15 @@ const userAuth = computed(() => getUser())
 const setAuth = (val: boolean) => {
   if (!val) {
     localStorage.removeItem('user-info')
+    router.push({ path: '/' })
+  } else {
+    router.push({ path: '/dashboard' })
   }
 
   auth.value = val
 }
 
 const setMode = (mode: 'dark' | 'light' | string) => {
-
   theme.value = mode
   localStorage.setItem('mode-v-app', mode)
 }
