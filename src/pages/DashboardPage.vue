@@ -9,12 +9,11 @@
 
 <script lang="ts" setup>
 import { getTime, getUser } from '@/utils/userAuth'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 const user = computed(() => getUser())
 const time = computed(() => getTime())
 const message = computed(() => dateTime())
-// const message = ref('')
 
 const dateTime = () => {
   var ndate = new Date()

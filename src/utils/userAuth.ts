@@ -13,12 +13,12 @@ export const getTheme = () => {
 }
 
 export const getTime = () => {
-  var currentTime = new Date()
+  const currentTime = new Date()
 
-  var hours = currentTime.getHours()
-  var minutes = currentTime.getMinutes()
-  var seconds = currentTime.getSeconds()
+  const hours = currentTime.getHours()
+  const minutes = currentTime.getMinutes()
+  const seconds = currentTime.getSeconds()
 
-  var formattedTime = hours + ':' + minutes + ':' + seconds
+  const formattedTime = hours + ':' + minutes + ':' + seconds
   return formattedTime
 }

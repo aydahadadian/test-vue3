@@ -19,7 +19,7 @@
 
               <a-button type="link" danger @click="removeItem(item.key)">remove</a-button>
 
-              <!-- <a key="list-loadmore-more">select</a> -->
+
             </template>
 
             <a-checkbox
@@ -27,7 +27,7 @@
               v-model:checked="item.checked"
               @change="onCheck"
             >
-              <!-- <a-typography-text :delete="item.checked">{{ item.label }}</a-typography-text> -->
+
 
               <a-typography-paragraph
                 class="!ml-7 flex mb-0"
@@ -36,28 +36,22 @@
                 :editable="{ editing: item.edit, maxlength: 100 }"
               >
                 <template #editableIcon>
-                  <!-- <a-button type="link" danger>edit</a-button -->
+
                 </template>
               </a-typography-paragraph>
             </a-checkbox>
           </a-list-item>
         </template>
-        <!-- <template #header>
-          <div>Header</div>
-        </template>
-        <template #footer>
-          <div>Footer</div>
-        </template> -->
+     
       </a-list>
     </a-card>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { HighlightOutlined, SmileOutlined, SmileFilled, CheckOutlined } from '@ant-design/icons-vue'
-import { onMounted, reactive, ref } from 'vue'
+import { CheckOutlined } from '@ant-design/icons-vue'
+import { onMounted, ref } from 'vue'
 const item = ref()
-const edit = ref()
 const data = ref<{ checked: boolean; label: string; edit: boolean; key: number }[]>([])
 
 const setTodos = () => {
@@ -94,7 +88,7 @@ const onCheck = () => setTodos()
 
 onMounted(() => {
   const localData = localStorage.getItem('todo-v-app')
-  if (!!localData) {
+  if (localData) {
     data.value = JSON.parse(localData)
   }
 })

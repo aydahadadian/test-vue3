@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Dashboard from '../pages/Dashboard.vue'
-import Todos from '../pages/Todos.vue'
-import Weather from '../pages/Weather.vue'
-import Profile from '../pages/Profile.vue'
+import Dashboard from '../pages/DashboardPage.vue'
+import Todos from '../pages/TodosPage.vue'
+import Weather from '../pages/WeatherPage.vue'
+import Profile from '../pages/ProfilePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,8 +26,7 @@ const router = createRouter({
       path: '/profile',
       name: 'Profile',
       component: Profile
-    },
-
+    }
   ]
 })
 

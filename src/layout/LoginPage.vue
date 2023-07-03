@@ -1,16 +1,11 @@
 <template>
   <a-layout style="min-height: 100vh">
     <a-layout-content
-      style="
-        min-height: 100%;
-        background: #fff;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-      "
+      :class="`${bc} ${color}`"
+      style="min-height: 100%; justify-content: center; display: flex; align-items: center"
     >
       <Card
-        class="flex flex-col justify-center p-6 bg-gray-200 border-radius-4 w-[50vw] h-[50vh] rounded-md"
+        class="flex flex-col justify-center !p-[8rem] bg-gray-200 border-radius-4 w-[50vw] h-[50vh] rounded-md"
       >
         <a-typography-title :level="3">Enter your name :</a-typography-title>
         <a-form
@@ -41,7 +36,9 @@
 <script lang="ts" setup>
 import { setUser } from '@/utils/userAuth'
 
-import { reactive } from 'vue'
+import { inject, reactive } from 'vue'
+const { bc, color } = inject<any>('theme')
+const { setAuth } = inject<any>('auth')
 
 interface FormState {
   username: string
@@ -49,14 +46,13 @@ interface FormState {
 
 const emit = defineEmits(['setAuth'])
 
-// const authRef = toRef(props.auth)
 const formState = reactive<FormState>({
   username: ''
 })
 const onFinish = (values: any) => {
   if (!!values.username && values.username.trim() !== '') {
     setUser(values.username)
-    emit('setAuth', true)
+    setAuth(true)
   }
 }
 

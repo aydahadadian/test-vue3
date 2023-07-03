@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue'
+import { inject, onMounted, ref } from 'vue'
 import { getTheme, getUser, setUser } from '../utils/userAuth'
 
 const user = ref<any>('')
@@ -32,14 +32,11 @@ const handleEdit = () => {
 }
 
 const check = ref<boolean>(false)
-const emit = defineEmits(['setTheme'])
+
+const { setMode } = inject<any>('theme')
+
 const change = (value: boolean) => {
-  if (!!value) {
-    localStorage.setItem('mode-v-app', 'dark')
-  } else {
-    localStorage.setItem('mode-v-app', 'light')
-  }
-  emit('setTheme')
+  !!value ? setMode('dark') : setMode('light')
 }
 
 onMounted(() => {

@@ -9,6 +9,4 @@ export const getWeather = async (lat: string, lng: string) => {
   } catch (err) {
     console.error(err)
   }
-
-  // return res
 }
